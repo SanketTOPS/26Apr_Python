@@ -1,16 +1,17 @@
-class studinfo:
+class student:
     stid=0
-    stnm=""
+    stnm=''
 
     def getdata(self):
         self.stid=input("Enter ID:")
         self.stnm=input("Enter Name:")
 
+class tops(student):
     def printdata(self):
         print("ID:",self.stid)
         print("Name:",self.stnm)
 
 
-st=studinfo()
-st.getdata()
-st.printdata()
+tp=tops()
+tp.getdata()
+tp.printdata()
