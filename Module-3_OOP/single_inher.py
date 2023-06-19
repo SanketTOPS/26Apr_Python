@@ -1,4 +1,4 @@
-class student:
+class student: #super calss
     stid=0
     stnm=''
 
@@ -6,7 +6,7 @@ class student:
         self.stid=input("Enter ID:")
         self.stnm=input("Enter Name:")
 
-class tops(student):
+class tops(student): #sub class
     def printdata(self):
         print("ID:",self.stid)
         print("Name:",self.stnm)
