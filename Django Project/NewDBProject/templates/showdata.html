@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Showdata</title>
+    <link rel="icon" type="image/x-icon" href="/static/imgs/favicon_app.png">
+</head>
+<body style="background-color: rgb(179, 179, 23);">
+    <center><h1>All Data</h1></center>
+    <hr>
+    <!-- {{data}} -->
+    <!-- {% for i in data %}
+    {{i.firstname}}
+    {{i.lastname}}
+    {{i.email}}
+    {{i.dob}}
+    {{i.mobile}}
+    {% endfor %} -->
+
+    <table align="center" border="2">
+        <tr>
+            <th>ID</th>
+            <th>Firstname</th>
+            <th>Lastname</th>
+            <th>Email</th>
+            <th>DOB</th>
+            <th>Mobile</th>
+        </tr>
+        {% for i in data %}
+        <tr>
+            <td>{{i.id}}</td>
+            <td>{{i.firstname}}</td>
+            <td>{{i.lastname}}</td>
+            <td>{{i.email}}</td>
+            <td>{{i.dob}}</td>
+            <td>{{i.mobile}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+
+</body>
+</html>
