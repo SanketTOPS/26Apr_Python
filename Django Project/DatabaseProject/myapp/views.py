@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from .forms import userForm
+from .forms import userForm,updateData
 from .models import userInfo
 # Create your views here.
 
@@ -22,5 +22,14 @@ def deletedata(request,id):
     userInfo.delete(stid)
     return redirect('showdata')
 
-def updatedata(request):
-    return render(request,'updatedata.html')
+def updatedata(request,id):
+    stid=userInfo.objects.get(id=id)
+    if request.method=='POST':
+        updateform=updateData(request.POST,instance=stid)
+        if updateform.is_valid():
+            updateform.save()
+            print("Your data has been updated!")
+            return redirect('showdata')
+        else:
+            print(updateform.errors)
+    return render(request,'updatedata.html',{'stid':stid})
