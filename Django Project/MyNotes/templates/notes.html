@@ -73,8 +73,42 @@
         </div>
     </nav>
     <!-- Navbar End -->
-   
 
+    {% if cuser is none %}
+    <div class="container my-5">
+        <center><h1>If you want to submit your POST, So Login first!</h1></center>
+    </div>
+    {% else %}
+    <!-- Notes form start -->
+    <div class="container my-5">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-floating mb-3">
+                <input type="text" name="query" class="form-control" id="floatingInput" placeholder="name@example.com">
+                <label for="floatingInput">Query Title</label>
+            </div>
+            <select class="form-select form-select-lg mb-3" name="opt" aria-label="Large select example">
+                <option selected>Open this select menu</option>
+                <option>Core Python</option>
+                <option>Python with Django</option>
+                <option>PHP</option>
+                <option>JAVA</option>
+                <option>Android / iOS</option>
+                <option>Other</option>
+            </select>
+            <div>
+                <label for="formFileLg" class="form-label">Select your file's</label>
+                <input class="form-control form-control-lg" name="myfiles" id="formFileLg" type="file">
+            </div>
+            <div class="mb-3 my-3">
+                <label for="exampleFormControlTextarea1" class="form-label">Comments</label>
+                <textarea class="form-control" name="comments" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+            <button type="submit" class="btn btn-warning btn-lg">Submit POST</button>
+        </form>
+    </div>
+    <!-- Notes form end -->
+    {% endif %}
 </body>
 
 </html>
