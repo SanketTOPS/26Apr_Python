@@ -1,7 +1,9 @@
 from django.shortcuts import render,redirect
-from .forms import signupForm,updateForm,notesForm
+from .forms import signupForm,updateForm,notesForm,callbackForm
 from .models import userSignup
 from django.contrib.auth import logout
+from django.core.mail import send_mail
+from MyNotes import settings
 
 # Create your views here.
 
@@ -16,7 +18,6 @@ def index(request):
             else:
                 print(newuser.errors)
         elif request.POST.get('login')=='login':
-
             unm=request.POST['username']
             pas=request.POST['password']
             
@@ -62,6 +63,21 @@ def about(request):
     return render(request,'about.html')
 
 def contact(request):
+    if request.method=='POST':
+        newCallback=callbackForm(request.POST)
+        if newCallback.is_valid():
+            newCallback.save()
+            print("Your form has been submitted!")
+
+            #Email Sending Code
+            sub="Thank you!"
+            msg=f"Hello User!\n\nWe have recieved your feedback, We will contact you in short time.\n\nThanks & regards!\nNotesApp Team\n+91 9724799469 | help@notesapp.com"
+            from_ID=settings.EMAIL_HOST_USER
+            #to_ID=["nehagaraniya360@gmail.com","sanjuahir009@gmail.com","parmarmayur5778@gmail.com","divyeshpatel6825@gmail.com"]
+            to_ID=[request.POST['email']]
+            send_mail(subject=sub,message=msg,from_email=from_ID,recipient_list=to_ID)
+        else:
+            print(newCallback.errors)
     return render(request,'contact.html')
 
 def userlogout(request):

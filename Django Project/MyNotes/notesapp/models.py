@@ -21,3 +21,11 @@ class mynotes(models.Model):
     opt=models.CharField(max_length=100)
     myfiles=models.FileField(upload_to='Files')
     comments=models.TextField()
+
+
+class callback(models.Model):
+    created=models.DateTimeField(default=datetime.now(),blank=True)
+    fullname=models.CharField(max_length=50)
+    mobile=models.BigIntegerField()
+    email=models.EmailField()
+    msg=models.TextField()
