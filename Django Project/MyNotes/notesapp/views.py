@@ -4,16 +4,20 @@ from .models import userSignup
 from django.contrib.auth import logout
 from django.core.mail import send_mail
 from MyNotes import settings
+import requests
+import random
 
 # Create your views here.
-
+status=False
 def index(request):
+    global status
     cuser=request.session.get('user')
     if request.method=='POST':
         if request.POST.get('signup')=='signup':
             newuser=signupForm(request.POST)
             if newuser.is_valid():
                 newuser.save()
+                status=True
                 print("Signup Successfully!")
             else:
                 print(newuser.errors)
@@ -29,10 +33,22 @@ def index(request):
                 print("Login Successfull!")
                 request.session['user']=unm #create a session
                 request.session['userid']=userid.id
+                mob=request.session['mobile']=userid.mobile
+
+                #OTP Sending 
+                """otp=random.randint(1111,9999)
+                url = "https://www.fast2sms.com/dev/bulkV2"
+                querystring = {"authorization":"KEodGZf5czOeCxJPkWAFHQUYtS86Rbmrv1MyuViag4hs7N2DujvzKSw5MN9mRryb3LC4DsIHiWph78","variables_values":f"{otp}","route":"otp","numbers":f"{mob}"}
+                headers = {
+                    'cache-control': "no-cache"
+                }
+                response = requests.request("GET", url, headers=headers, params=querystring)
+                print(response.text)"""
+
                 return redirect('notes')
             else:
                 print("Error! Username or Password invalid...")
-    return render(request,'index.html',{'cuser':cuser})
+    return render(request,'index.html',{'cuser':cuser,'st':status})
 
 def notes(request):
     cuser=request.session.get('user')
