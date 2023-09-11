@@ -38,7 +38,28 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'notesapp',
+
+    #django-allauth
+    'django.contrib.sites', 
+    'allauth',
+    'allauth.account', 
+    'allauth.socialaccount', 
+    'allauth.socialaccount.providers.google', 
+    'allauth.socialaccount.providers.facebook', 
 ]
+
+#django-allauth
+SITE_ID = 1
+
+#django-allauth
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+
+#django-allauth
+LOGIN_REDIRECT_URL = '/'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -48,6 +69,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    # Add the account middleware:
+    "allauth.account.middleware.AccountMiddleware",
 ]
 
 ROOT_URLCONF = 'MyNotes.urls'
@@ -68,6 +92,7 @@ TEMPLATES = [
     },
 ]
 
+
 WSGI_APPLICATION = 'MyNotes.wsgi.application'
 
 
@@ -77,7 +102,7 @@ WSGI_APPLICATION = 'MyNotes.wsgi.application'
 DATABASES = {
     'default': {
         "ENGINE": "django.db.backends.mysql",
-        "NAME": "notesappdb",
+        "NAME": "mynotesappdb",
         "USER": "root",
         "PASSWORD": "",
         "HOST": "127.0.0.1",
