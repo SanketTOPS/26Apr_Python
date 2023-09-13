@@ -157,7 +157,7 @@
             
                         <div class="d-grid gap-2">
                             <button type="submit" name="login" value="login" class="btn btn-primary">Login</button>
-                            <a class="btn btn-primary">Login with Facebook</a>
+                            <a href="{% url 'social:begin' 'facebook' %}" class="btn btn-primary">Login with Facebook</a>
                             <a href="{% provider_login_url 'google' %}" class="btn btn-danger">Login with Google</a>
                         </div>
                     </form>
