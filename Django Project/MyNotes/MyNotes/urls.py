@@ -20,6 +20,4 @@ from django.urls import path,include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('notesapp.urls')),
-    path('accounts/', include('allauth.urls')),
-    path('oauth/', include('social_django.urls', namespace='social')),  # <-- here
 ]
