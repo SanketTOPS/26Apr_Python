@@ -4,8 +4,14 @@ from rest_framework.response import Response
 from .models import *
 from .serializers import *
 from rest_framework import status
+import json
 
 # Create your views here.
+
+
+def index(request):
+    data=studinfo.objects.all()
+    return render(request,'index.html',{'data':data})
 
 @api_view(['GET'])
 def getdata(request):
